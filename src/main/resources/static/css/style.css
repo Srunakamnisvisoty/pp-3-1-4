@@ -1,0 +1,84 @@
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+.action {
+    width: 233px;
+    background: firebrick;
+    color: white;
+    font-size: 12pt;
+}
+
+.logoutCancel {
+    width: 233px;
+    background: darkgrey;
+    color: white;
+    font-size: 12pt;
+}
+.logout {
+    width: 830px;
+    background: darkgrey;
+    color: white;
+    font-size: 12pt;
+}
+
+table {
+    border: 1px solid black;
+    width: 610px;
+}
+
+tr {
+    height: 15px;
+}
+
+th {
+    border: 1px solid black
+}
+
+td {
+    align-content: center;
+    border: 1px solid black
+}
+
+.cellbut1 {
+    width: 100%;
+    height: min-content;
+    background: firebrick;
+    color: white;
+    font-size: 12pt;
+}
+
+.cellbut2 {
+    width: 100%;
+    height: min-content;
+    background: cornflowerblue;
+    color: white;
+    font-size: 12pt;
+}
+
+.cellbut3 {
+    width: 610px;
+    margin-bottom: 1px;
+    height: min-content;
+    background: darkgreen;
+    color: white;
+    font-size: 12pt;
+}
+
+.cellbut4 {
+    width: 610px;
+    margin-bottom: 1px;
+    height: min-content;
+    background: darkgrey;
+    color: white;
+    font-size: 12pt;
+}

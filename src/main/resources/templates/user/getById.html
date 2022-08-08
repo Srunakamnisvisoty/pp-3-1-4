@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="base">
+<head>
+    <meta charset="UTF-8">
+    <title>Show one user</title>
+</head>
+<body>
+<div layout:fragment="page_content">
+    <h1>User information-page</h1>
+    <div id="allUsers" class="tab-pane active">
+        <div class="card">
+            <div class="card-header"><p><strong>About user</strong></p></div>
+            <div class="text-center">
+                <div class="p-3">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">User ID</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Roles</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.login}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.age}"></td>
+                        <td th:text="${user.roles}"></td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

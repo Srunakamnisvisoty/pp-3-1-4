@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="base">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div layout:fragment="page_content">
+    <h1>Admin Panel</h1>
+    <ul class="nav nav-tabs">
+        <li class="nav-item active">
+            <a data-bs-toggle="tab" class="nav-link active" data-bs-target="#allUsers" id="userTablePage">Users table</a>
+        </li>
+        <li class="nav-item">
+            <a data-bs-toggle="tab" class="nav-link" data-bs-target="#newUser" id="newUserLink">New User</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="allUsers" class="tab-pane active">
+            <div class="card">
+                <div class="card-header"><p><strong>All Users</strong></p></div>
+                <div class="p-3">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">User ID</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Roles</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody id="usersTableBody"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="newUser" class="tab-pane">
+            <div class="card">
+                <div class="card-header"><p><strong>Add new user</strong></p></div>
+                <div style="background-color: white">
+                    <form>
+                        <input type="hidden" id="idN" name="idN"/>
+                        <input type="hidden" id="rolesN" name="rolesN" />
+                        <input type="hidden" id="roleListN" name="roleListN" />
+                        <div class="row justify-content-center">
+                            <div class="col-3 mt-5">
+                                <div class="d-grid gap-4 text-center">
+                                    <div class="form-group">
+                                        <label for="loginN"><strong>Login</strong> </label>
+                                        <input type="text" name="loginN" id="loginN" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwordN"><strong>Password</strong></label>
+                                        <input type="password" name="passwordN" id="passwordN" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailN"><strong>Email</strong></label>
+                                        <input type="text" name="emailN" id="emailN" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ageN"><strong>Age</strong></label>
+                                        <input type="number" name="ageN" id="ageN" class="form-control" min="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="securityRolesListN"><strong>Role</strong></label>
+                                        <select id="securityRolesListN" name="securityRolesListN" size="2" multiple="multiple" class="form-control">
+                                            <option th:each="str : ${securityRoleList}"
+                                                    th:value='|{"id":${str.id},"role":"${str.role}"}|'
+                                                    th:text="${str.role}">
+                                                USER
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="button" id="create_user" name="create_user">Create User</button>
+                                        <button class="btn btn-secondary" type="button" id="clear_user" name="clear_user">Clear Form</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <div class="modal fade" tabindex="-1" aria-labelledby="" aria-hidden="true" id="modalEdit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="idE" name="idE"/>
+                        <input type="hidden" id="rolesE" name="rolesE" />
+                        <input type="hidden" id="roleListE" name="roleListE" />
+                        <div class="row justify-content-center">
+                            <div class="col-8">
+                                <div class="d-grid gap-2 text-center">
+                                    <div class="form-group">
+                                        <label for="loginE">Login </label>
+                                        <input type="text" name="loginE" id="loginE" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwordE">Password </label>
+                                        <input type="password" name="passwordE" id="passwordE" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailE">Email </label>
+                                        <input type="text" name="emailE" id="emailE" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ageE">Age</label>
+                                        <input type="number" name="ageE" id="ageE" class="form-control" min="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="securityRolesListE"><strong>Role</strong></label>
+                                        <select id="securityRolesListE" name="securityRolesListE" size="2" multiple="multiple" class="form-control">
+                                            <option th:each="str : ${securityRoleList}"
+                                                    th:value='|{"id":${str.id},"role":"${str.role}"}|'
+                                                    th:text="${str.role}">
+                                                USER
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="edit_button" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" aria-labelledby="" aria-hidden="true" id="modalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="idD" name="idD"/>
+                        <input type="hidden" id="rolesD" name="rolesD" />
+                        <input type="hidden" id="roleListD" name="roleListD" />
+                        <div class="row justify-content-center">
+                            <div class="col-8">
+                                <div class="d-grid gap-2 text-center">
+                                    <div class="form-group">
+                                        <label for="loginD">Login </label>
+                                        <input readonly type="text" name="loginD" id="loginD" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwordD">Password </label>
+                                        <input readonly type="password" name="passwordD" id="passwordD" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailD">Email </label>
+                                        <input readonly type="text" name="emailD" id="emailD" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ageD">Age</label>
+                                        <input readonly type="number" name="ageD" id="ageD" class="form-control" min="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="securityRolesListD"><strong>Role</strong></label>
+                                        <select readonly id="securityRolesListD" name="securityRolesListD" size="2" multiple="multiple" class="form-control">
+                                            <option th:each="str : ${securityRoleList}"
+                                                    th:value='|{"id":${str.id},"role":"${str.role}"}|'
+                                                    th:text="${str.role}">
+                                                USER
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="delete_button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+</div>
+<th:block layout:fragment="page_script">
+    <script th:src="@{/js/admin.js}" type="text/javascript"></script>
+</th:block>
+</body>
+</html>
